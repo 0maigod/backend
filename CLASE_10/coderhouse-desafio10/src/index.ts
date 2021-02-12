@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import { Producto } from './producto'
 import {CommonRoutesConfig} from './rutas/common.route.config'
 import {UsersRoutes} from './rutas/users.route.config'
@@ -24,14 +25,14 @@ app.engine(
     handlebars({
         extname: ".hbs",
         defaultLayout: "visualizar.hbs", 
-        layoutsDir: "/usuarios/alumno/Documentos/code/backend/CLASE_10/coderhouse-desafio10/views/layouts",
-        partialsDir: "/usuarios/alumno/Documentos/code/backend/CLASE_10/coderhouse-desafio10/views/partials"
+        layoutsDir: path.join(__dirname,  '..', 'views', 'layouts'),
+        partialsDir: path.join(__dirname, '..', 'views', 'partials')
     })
 )
 
-app.set('views', '/usuarios/alumno/Documentos/code/backend/CLASE_10/coderhouse-desafio10/views')
+app.set('views', path.join(__dirname, '..', 'views'))
 app.set('view engine', 'hbs')
 
-app.listen(8080, () => {
+app.listen(9090, () => {
     console.log('escuchando en 8080')
 }).on('error', console.log);

@@ -17,7 +17,7 @@ export class UsersRoutes extends CommonRoutesConfig {
 
         this.app.route('/ingresar')
         .get((req: express.Request, res: express.Response) =>{
-            res.status(200).sendFile('/usuarios/alumno/Documentos/code/backend/CLASE_10/coderhouse-desafio10/public/ingresar.html')
+            res.status(200).sendFile(path.join(__dirname, '..', '..', 'public', 'ingresar.html'))
         })
         .post(urlencodedParser,(req: express.Request, res: express.Response) => {
             let id = (this.productos.length + 1).toString()
@@ -30,7 +30,7 @@ export class UsersRoutes extends CommonRoutesConfig {
                     thumbnail
             }
             this.productos.push(prod)
-            res.status(200).sendFile('/usuarios/alumno/Documentos/code/backend/CLASE_10/coderhouse-desafio10/public/ingresar.html')
+            res.status(200).sendFile(path.join(__dirname, '..', '..', 'public', 'ingresar.html'))
         })
 
         this.app.route('/productos/vista')
