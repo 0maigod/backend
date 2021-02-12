@@ -1,5 +1,4 @@
 import express from 'express'
-import path from 'path'
 import { Producto } from '../producto'
 import { CommonRoutesConfig } from './common.route.config'
 import  bodyParser from 'body-parser'
@@ -16,9 +15,12 @@ export class UsersRoutes extends CommonRoutesConfig {
     configureRoutes() {
 
         this.app.route('/ingresar')
+        .get((req: express.Request, res: express.Response) =>{
+            res.status(200).sendFile('/usuarios/alumno/Documentos/code/backend/CLASE_10/coderhouse-desafio10/public/ingresar.html')
+        })
         .post(urlencodedParser,(req: express.Request, res: express.Response) => {
             let id = (this.productos.length + 1).toString()
-            console.log(req.body)
+            // console.log(req.body)
             const {title, price, thumbnail} = req.body
             const prod = {
                     id,
@@ -39,6 +41,7 @@ export class UsersRoutes extends CommonRoutesConfig {
         .get((req: express.Request, res: express.Response) =>{
             if(this.productos.length === 0){
                 res.status(404).send(`{error: 'no hay productos cargados'}`)
+                return
             }
             res.status(200).json(this.productos)
         })
@@ -61,14 +64,16 @@ export class UsersRoutes extends CommonRoutesConfig {
             const prod = this.productos.find( prod => prod.id === id)
             if (!prod){
                 res.send(`{error: 'producto no encontrado'}`)
+                return
             }
             res.status(200).json(prod)
         })
-        .patch(jsonParser, (req: express.Request, res: express.Response) =>{
+        .put(jsonParser, (req: express.Request, res: express.Response) =>{
             const id = req.params.id
             let prod = this.productos.find( prod => prod.id === id)
             if (!prod){
                 res.send(`{error: 'producto no encontrado'}`)
+                return
             }
             this.productos = this.productos.filter( prod => prod.id !== id)
             const {title, price, thumbnail} = req.body
@@ -86,6 +91,7 @@ export class UsersRoutes extends CommonRoutesConfig {
             const prod = this.productos.find( prod => prod.id === id)
             if(!prod){
                 res.sendStatus(404)
+                return
             }
             this.productos = this.productos.filter( prod => prod.id !== id)
             res.send(prod)
