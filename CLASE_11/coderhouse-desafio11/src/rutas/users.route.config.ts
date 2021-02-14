@@ -17,7 +17,8 @@ export class UsersRoutes extends CommonRoutesConfig {
 
         this.app.route('/ingresar')
         .get((req: express.Request, res: express.Response) =>{
-            res.status(200).sendFile(path.join(__dirname, '..', '..', 'public', 'ingresar.html'))
+            res.status(200).render('pages/ingresar', {
+            })
         })
         .post(urlencodedParser,(req: express.Request, res: express.Response) => {
             let id = (this.productos.length + 1).toString()
@@ -30,15 +31,11 @@ export class UsersRoutes extends CommonRoutesConfig {
                     thumbnail
             }
             this.productos.push(prod)
-            res.status(200).sendFile(path.join(__dirname, '..', '..', 'public', 'ingresar.html'))
+            res.status(200).render('pages/ingresar', {
+            })
         })
 
         this.app.route('/productos/vista')
-        .get((req: express.Request, res: express.Response) =>{
-            res.status(200).render('main', { productos: this.productos, listExists: true});
-        })
-
-        this.app.route('/ejs')
         .get((req: express.Request, res: express.Response) =>{
             res.status(200).render('pages/index', {
                 productos: this.productos,

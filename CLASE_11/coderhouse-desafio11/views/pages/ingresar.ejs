@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+
+    <main>
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-3"></div>
+                <h1>Formulario de ingreso de datos</h1>
+                    <div class="col-6">
+                        <form action="/ingresar" enctype="application/x-www-form-urlencoded" method="POST" name="myform">
+                            <br>
+                            <br>
+                            <div class="mb-4">
+                                <label class="form-label">Producto</label>
+                                <input type="text" class="form-control" name="title">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Precio</label>
+                                <input type="text" class="form-control" name="price">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Thumbnail</label>
+                                <input type="text" class="form-control" name="thumbnail">
+                                <div>Ingrese una url con la imagen.</div>
+                            </div>
+                
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>
