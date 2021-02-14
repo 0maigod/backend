@@ -1,0 +1,25 @@
+include partials/head.pug   
+body
+    include partials/header
+    .jumbotron
+        .row
+            .col-3
+            h1 Formulario de ingreso de datos
+            .col-6
+            form(action='/ingresar' enctype='application/x-www-form-urlencoded' method='POST' name='myform')
+                .mb-4
+                label.form-label Producto
+                input.form-control(type='text' name='title')
+                .mb-4
+                label.form-label Precio
+                input.form-control(type='text' name='price')
+                .mb-4
+                label.form-label Thumbnail
+                input.form-control(type='text' name='thumbnail')
+                div Ingrese una url con la imagen.
+                br
+                button.btn.btn-primary(type='submit') Submit
+            .col-3
+    br
+    br
+    include partials/footer

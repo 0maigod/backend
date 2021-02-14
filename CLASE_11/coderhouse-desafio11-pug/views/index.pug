@@ -1,0 +1,20 @@
+include partials/head.pug   
+body
+  include partials/header
+  .jumbotron
+    h1 Formulario de ingreso de datos
+    ul
+      if productos.length === 0
+        h1 No hay productos agregados
+      else
+        each prod in productos
+          .row.align-items-center(style='background-color:#aaa')
+            .col.w-25.p-3
+              h4= prod.title
+            .col.w-25.p-3
+              h4= prod.price
+            .col.w-50.p-3
+              img(src=prod.thumbnail style='max-width:50px')
+  br
+  br
+  include partials/footer
