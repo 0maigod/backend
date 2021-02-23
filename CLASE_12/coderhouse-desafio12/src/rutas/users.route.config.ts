@@ -32,10 +32,10 @@ export class UsersRoutes extends CommonRoutesConfig {
         //     res.status(200).render('main', { productos: this.productos, listExists: true})
         // })
 
-        this.app.route('/productos/vista')
-        .get((req: express.Request, res: express.Response) =>{
-            res.status(200).render('main', { productos: this.productos, listExists: true});
-        })
+        // this.app.route('/productos/vista')
+        // .get((req: express.Request, res: express.Response) =>{
+        //     res.status(200).render('main', { productos: this.productos, listExists: true});
+        // })
 
         this.app.route('/api/productos')
         .get((req: express.Request, res: express.Response) =>{

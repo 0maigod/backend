@@ -69,26 +69,23 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
 
     <script>
         const socket = io();
         let source = `{{#productos}}
-                        <div class="row align-items-center" style="background-color:#aaa">
-                            <div class="col w-25 p-3">
-                                <h4>{{title}}</h4>
-                            </div>
-                            <div class="col w-25 p-3">
-                                <h4>{{price}}</h4>
-                            </div>
-                            <div class="col w-50 p-3"><img src={{thumbnail}} style="max-width:50px"></div>
-                        </div>
-                    {{/productos}}`;
+                                    <div class="row align-items-center" style="background-color:#aaa">
+                                        <div class="col w-25 p-3">
+                                            <h4>{{title}}</h4>
+                                        </div>
+                                        <div class="col w-25 p-3">
+                                            <h4>{{price}}</h4>
+                                        </div>
+                                        <div class="col w-50 p-3"><img src={{thumbnail}} style="max-width:50px"></div>
+                                    </div>
+                                {{/productos}}`;
 
-        let template = Handlebars.compile(source)
-        let uLista = document.getElementById('prodList')
+        let templateH = Handlebars.compile(source)
+        //        let uLista = document.getElementById('prodList')
 
         socket.on('coneccion', data => {
             let usuario = prompt(data)
@@ -113,7 +110,10 @@
         });
 
         socket.on("recargar", function (productos) {
-            return uLista.innerHTML = template(productos)
+            console.log('Recibiendo evento recargar')
+            let uLista = document.getElementById('prodList')
+            console.log(templateH(productos))
+            return uLista.innerHTML = templateH(productos)
         })
 
     </script>

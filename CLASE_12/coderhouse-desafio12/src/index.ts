@@ -47,17 +47,18 @@ io.on("connection", function(socket: any) {
         // console.log(message);
         let id = (productos.length + 1).toString()
             // console.log(req.body)
-            const {title, price, thumbnail, nombre} = message
-            const prod = {
+        const {title, price, thumbnail, nombre} = message
+        const prod = {
                     id,
                     title,
                     price: parseInt(price),
                     thumbnail
-            }
+        }
         productos.push(prod)
         socket.broadcast.emit("recargar", productos)
         socket.emit("recargar", productos)
         console.log(`${nombre} ha agregado un producto`)
+        console.log(productos)
     });
     
 });
