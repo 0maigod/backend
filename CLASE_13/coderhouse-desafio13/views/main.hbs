@@ -24,20 +24,7 @@
             <ul style="margin: 0px; padding: 0px" id="prodList"></ul>
             <br>
             <br>
-            <div style="background-color: rgb(71, 71, 71)1, 87, 87); padding: 25px">
-                <h1>CENTRO CENTRAL DE MENSAJES</h1>
-                <input type="text" placeholder="Ingrese su mail" name="email">
-                <br>
-                <hr>
-                <br>
-                <ul style="margin: 0px; padding: 0px" id="msgList">
-                    <li>item viejo</li>
-                </ul>
-                <br>
-                <input type="text" placeholder="Ingrese su mensaje" name="mensaje"><button class="btn btn-primary"
-                    style="margin: 10px" id="submitMsg">Submit</button>
-            </div>
-
+            {{> chat}}
 
         </div>
         <div class="col-3"></div>
@@ -61,18 +48,6 @@
                                         <div class="col w-50 p-3"><img src={{thumbnail}} style="max-width:50px"></div>
                                     </div>
                                 {{/productos}}`;
-
-        let sourceMsg = `{{#mensajes}}
-                                    <div class="row align-items-center" style="background-color:#aaa">
-                                        <div class="col w-25 p-3">
-                                            <h4>{{email}}</h4>
-                                        </div>
-                                        <div class="col w-25 p-3">
-                                            <h4>{{fecha}}</h4>
-                                        </div>
-                                        <div class="col w-50 p-3"><img src={{mensaje}} style="max-width:50px"></div>
-                                    </div>
-                                {{/mensajes}}`;
 
         socket.on('coneccion', data => {
             let usuario = prompt(data)
@@ -119,12 +94,20 @@
         })
 
         socket.on("recargMsg", function (mensajes) {
-            mensajes.forEach(elem => {
-                console.log('Mensajes ' + elem.email)
-            })
-
             let msgLista = document.getElementById('msgList')
-            //            msgLista.innerHTML = templateMsg(mensajes)
+            mensajes.forEach(elem => {
+                let cadaMsg = `<div class="row align-items-center" style="background-color:#aaa">
+                                    <div class="col w-25 p-3" align="center">
+                                        <b style="color:blue">${elem.email}</b>
+                                    </div>
+                                    <div class="col w-25 p-3" align="center">
+                                        <p style="color:brown">[${elem.fecha}]</p>
+                                    </div>
+                                    <div class="col w-50 p-3"><i style="color:green">${elem.mensaje}</i></div>
+                                </div>`
+
+                msgLista.innerHTML += cadaMsg
+            })
             return console.log('Recibiendo evento recargar')
         })
     </script>

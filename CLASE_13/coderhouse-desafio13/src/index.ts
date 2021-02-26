@@ -38,24 +38,24 @@ app.set('views', path.join(__dirname, '..', 'views'))
 app.set('view engine', 'hbs')
 
 //------SOCKET IO-------------------------------
-// let mensajes = [{
-//     "email": "hola@gmail.com",
-//     "fecha": "DD/MM/YYYY HH:MM:SS",
-//     "mensaje": "hola gente de coderhouse",
-//     "id": 1
-//     },
-//     {
-//         "email": "chau@gmail.com",
-//         "fecha": "DD/MM/YYYY HH:MM:SS",
-//         "mensaje": "hola gente de coderhouse y aledaños",
-//         "id": 2
-//     }]
-let mensajes = chatMensajes.leer()
+let mensajes = [{
+    "email": "hola@gmail.com",
+    "fecha": "25/02/2021 04:53:33",
+    "mensaje": "hola gente de coderhouse",
+    "id": 1
+    },
+    {
+        "email": "chau@gmail.com",
+        "fecha": "25/02/2021 05:01:36",
+        "mensaje": "hola gente de coderhouse y aledaños",
+        "id": 2
+    }]
+// let mensajes = chatMensajes.leer()
 
 io.on("connection", function(socket: any) {
     socket.emit('coneccion', 'Bienvenidx, por favor indique su nombre')
     socket.emit("recargProd", productos)
-    console.log(mensajes)
+    // console.log(mensajes)
     io.emit("recargMsg", mensajes)
     
     socket.on('bienvenida', (data: any) => {
@@ -66,7 +66,6 @@ io.on("connection", function(socket: any) {
     socket.on("newProd", function(message: any) {
         // console.log(message);
         let id = (productos.length + 1).toString()
-            // console.log(req.body)
         const {title, price, thumbnail, nombre} = message
         const prod = {
                     id,
@@ -100,9 +99,6 @@ io.on("connection", function(socket: any) {
     
 });
 
-
-// chatMensajes.leer()     
-// {"email":"chau@gmail.com","fecha":25,"mensaje":"hola gente de coderhouse y aledaños","id":3}
 
 //------SERVER----------------------------------
 
