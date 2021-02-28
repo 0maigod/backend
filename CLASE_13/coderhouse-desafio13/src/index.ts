@@ -28,8 +28,8 @@ app.engine(
     "hbs", 
     handlebars({
         extname: ".hbs",
-        defaultLayout: "main.hbs", 
-        layoutsDir: path.join(__dirname,  '..', 'views'),
+        defaultLayout: "ingresar.hbs", 
+        layoutsDir: path.join(__dirname,  '..', 'views', 'layouts'),
         partialsDir: path.join(__dirname, '..', 'views', 'partials')
     })
 )
@@ -38,23 +38,10 @@ app.set('views', path.join(__dirname, '..', 'views'))
 app.set('view engine', 'hbs')
 
 //------SOCKET IO-------------------------------
-// let mensajes = [{
-//     "email": "hola@gmail.com",
-//     "fecha": "25/02/2021 04:53:33",
-//     "mensaje": "hola gente de coderhouse",
-//     "id": 1
-//     },
-//     {
-//         "email": "chau@gmail.com",
-//         "fecha": "25/02/2021 05:01:36",
-//         "mensaje": "hola gente de coderhouse y aledaños",
-//         "id": 2
-//     }]
-
 
 io.on("connection", function(socket: any) {
     socket.emit('coneccion', 'Bienvenidx, por favor indique su nombre')
-    socket.emit("recargProd", productos)
+    // socket.emit("recargProd", productos)
     let mensajes = chatMensajes.leer().then(
         (messagesSolved)=>io.emit("recargMsg", messagesSolved)   
     )
@@ -75,7 +62,6 @@ io.on("connection", function(socket: any) {
                     thumbnail
         }
         productos.push(prod)
-        // io.broadcast.emit("recargar", productos)
         io.emit("recargProd", productos)
         console.log(`${nombre} ha agregado un producto`)
         console.log(productos)
@@ -92,9 +78,6 @@ io.on("connection", function(socket: any) {
                     mensaje
         }
         chatMensajes.guardar(msg)
-            // .then(function (response) {
-            // return console.log('va response guardado ' + response)
-            // })
             .then(function (response) {
                 mensajes = chatMensajes.leer()
                 return  mensajes
@@ -102,12 +85,6 @@ io.on("connection", function(socket: any) {
             .then(function (response) {
                 return io.emit("recargMsg", response)
         })
-        // mensajes = chatMensajes.leer()
-        //     .then(
-        //     (messagesSolved)=>io.emit("recargMsg", messagesSolved)   
-        //     )
-
-        // console.log(`${email} ha mandado un mensaje`)
 
     });
     

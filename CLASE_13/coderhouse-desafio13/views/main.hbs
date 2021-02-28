@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingresar Productos</title>
+    <title>Ingreso de Productos y Chat</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
             {{> form}}
             <br>
             <br>
-            <ul style="margin: 0px; padding: 0px" id="prodList"></ul>
+            {{> lista}}
             <br>
             <br>
             {{> chat}}
@@ -36,19 +36,6 @@
 
     <script>
         const socket = io();
-
-        let sourceProd = `{{#productos}}
-                                    <div class="row align-items-center" style="background-color:#aaa">
-                                        <div class="col w-25 p-3">
-                                            <h4>{{title}}</h4>
-                                        </div>
-                                        <div class="col w-25 p-3">
-                                            <h4>{{price}}</h4>
-                                        </div>
-                                        <div class="col w-50 p-3"><img src={{thumbnail}} style="max-width:50px"></div>
-                                    </div>
-                                {{/productos}}`;
-
         socket.on('coneccion', data => {
             let usuario = prompt(data)
             socket.id = usuario
@@ -86,11 +73,22 @@
         });
 
         socket.on("recargProd", function (productos) {
-            console.log('Productos ' + productos)
-            let templateProd = Handlebars.compile(sourceProd)
             let prodLista = document.getElementById('prodList')
-            prodLista.innerHTML = templateProd(productos)
-            return console.log('Recibiendo evento recargar')
+            prodLista.innerHTML = ''
+            productos.forEach(elem => {
+                let cadaProd = `<div class="row align-items-center" style="background-color:#aaa">
+                                    <div class="col w-25 p-3">
+                                        <h4>${elem.title}</h4>
+                                    </div>
+                                    <div class="col w-25 p-3">
+                                        <h4>${elem.price}</h4>
+                                    </div>
+                                    <div class="col w-50 p-3"><img src=${elem.thumbnail} style="max-width:50px"></div>
+                                </div>`
+
+                prodLista.innerHTML += cadaProd
+            })
+            return
         })
 
         socket.on("recargMsg", function (mensajes) {
@@ -98,17 +96,17 @@
             msgLista.innerHTML = ''
             mensajes.forEach(elem => {
                 let cadaMsg = `<div class="row align-items-center" style="background-color:#aaa">
-                                    <div class="col w-25 p-3" align="center">
-                                        <b style="color:blue">${elem.email}</b>
-                                    </div>
-                                    <div class="col w-25 p-3" align="center">
-                                        <p style="color:brown">[${elem.fecha}]</p>
-                                    </div>
-                                    <div class="col w-50 p-3"><i style="color:green">${elem.mensaje}</i></div>
-                                </div>`
+                                            <div class="col w-25 p-3" align="center">
+                                                <b style="color:blue">${elem.email}</b>
+                                            </div>
+                                            <div class="col w-25 p-3" align="center">
+                                                <p style="color:brown">[${elem.fecha}]</p>
+                                            </div>
+                                            <div class="col w-50 p-3"><i style="color:green">${elem.mensaje}</i></div>
+                                        </div>`
                 msgLista.innerHTML += cadaMsg
             })
-            return console.log('mensaje mandado')
+            return
         })
     </script>
 </body>

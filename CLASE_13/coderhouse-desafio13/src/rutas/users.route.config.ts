@@ -4,7 +4,6 @@ import { CommonRoutesConfig } from './common.route.config'
 import  bodyParser from 'body-parser'
 
 var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 export class UsersRoutes extends CommonRoutesConfig {
     productos: Producto []
@@ -15,27 +14,14 @@ export class UsersRoutes extends CommonRoutesConfig {
     configureRoutes() {
 
         this.app.route('/ingresar')
-        .get((req: express.Request, res: express.Response) =>{
-            res.status(200).render('main', { productos: this.productos, listExists: true})
+            .get((req: express.Request, res: express.Response) => {
+                if (this.productos.length == 0) {
+                    res.status(200).render('main', { productos: this.productos, listExists: false })
+                } else {
+                    res.status(200).render('main', { productos: this.productos, listExists: true })
+                }
+            
         })
-        // .post(urlencodedParser,(req: express.Request, res: express.Response) => {
-        //     let id = (this.productos.length + 1).toString()
-        //     // console.log(req.body)
-        //     const {title, price, thumbnail} = req.body
-        //     const prod = {
-        //             id,
-        //             title,
-        //             price: parseInt(price),
-        //             thumbnail
-        //     }
-        //     this.productos.push(prod)
-        //     res.status(200).render('main', { productos: this.productos, listExists: true})
-        // })
-
-        // this.app.route('/productos/vista')
-        // .get((req: express.Request, res: express.Response) =>{
-        //     res.status(200).render('main', { productos: this.productos, listExists: true});
-        // })
 
         this.app.route('/api/productos')
         .get((req: express.Request, res: express.Response) =>{
