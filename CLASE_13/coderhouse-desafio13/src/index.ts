@@ -38,25 +38,26 @@ app.set('views', path.join(__dirname, '..', 'views'))
 app.set('view engine', 'hbs')
 
 //------SOCKET IO-------------------------------
-let mensajes = [{
-    "email": "hola@gmail.com",
-    "fecha": "25/02/2021 04:53:33",
-    "mensaje": "hola gente de coderhouse",
-    "id": 1
-    },
-    {
-        "email": "chau@gmail.com",
-        "fecha": "25/02/2021 05:01:36",
-        "mensaje": "hola gente de coderhouse y aledaños",
-        "id": 2
-    }]
-// let mensajes = chatMensajes.leer()
+// let mensajes = [{
+//     "email": "hola@gmail.com",
+//     "fecha": "25/02/2021 04:53:33",
+//     "mensaje": "hola gente de coderhouse",
+//     "id": 1
+//     },
+//     {
+//         "email": "chau@gmail.com",
+//         "fecha": "25/02/2021 05:01:36",
+//         "mensaje": "hola gente de coderhouse y aledaños",
+//         "id": 2
+//     }]
+
 
 io.on("connection", function(socket: any) {
     socket.emit('coneccion', 'Bienvenidx, por favor indique su nombre')
     socket.emit("recargProd", productos)
-    // console.log(mensajes)
-    io.emit("recargMsg", mensajes)
+    let mensajes = chatMensajes.leer().then(
+        (messagesSolved)=>io.emit("recargMsg", messagesSolved)   
+    )
     
     socket.on('bienvenida', (data: any) => {
         console.log(data);
@@ -91,9 +92,22 @@ io.on("connection", function(socket: any) {
                     mensaje
         }
         chatMensajes.guardar(msg)
+            // .then(function (response) {
+            // return console.log('va response guardado ' + response)
+            // })
+            .then(function (response) {
+                mensajes = chatMensajes.leer()
+                return  mensajes
+            })
+            .then(function (response) {
+                return io.emit("recargMsg", response)
+        })
+        // mensajes = chatMensajes.leer()
+        //     .then(
+        //     (messagesSolved)=>io.emit("recargMsg", messagesSolved)   
+        //     )
 
-        io.emit("recargMsg", mensajes)
-        console.log(`${email} ha mandado un mensaje`)
+        // console.log(`${email} ha mandado un mensaje`)
 
     });
     
