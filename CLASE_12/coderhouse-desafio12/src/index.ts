@@ -1,5 +1,5 @@
 import express from "express"
-import socketio from "socket.io";
+// import socketio from "socket.io";
 import path from 'path'
 import { Producto } from './producto'
 import {CommonRoutesConfig} from './rutas/common.route.config'
@@ -37,7 +37,7 @@ app.set('view engine', 'hbs')
 
 io.on("connection", function(socket: any) {
     socket.emit('coneccion', 'Bienvenidx, por favor indique su nombre')
-    socket.emit("recargar", productos)
+    // socket.emit("recargProd", productos)
     
     socket.on('bienvenida', (data: any) => {
         console.log(data);
@@ -55,8 +55,8 @@ io.on("connection", function(socket: any) {
                     thumbnail
         }
         productos.push(prod)
-        socket.broadcast.emit("recargar", productos)
-        socket.emit("recargar", productos)
+        // socket.broadcast.emit("recargProd", productos)
+        socket.emit("recargProd", productos)
         console.log(`${nombre} ha agregado un producto`)
         console.log(productos)
     });
