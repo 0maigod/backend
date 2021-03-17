@@ -6,15 +6,11 @@ import {CommonRoutesConfig} from './rutas/common.route.config'
 import {UsersRoutes} from './rutas/users.route.config'
 import handlebars from 'express-handlebars'
 import { Mensaje } from './mensaje'
+import knex from 'knex'
+import options from './options-db'
 
-const knex = require('knex')({
-  client: 'sqlite3',
-  connection: {
-    filename: './DB/mensajes.sqlite',
-  },
-    useNullAsDefault: true,
-});
 
+const knexInstance = knex(options);
 const routes: Array<CommonRoutesConfig> = []
 
 const app = express()
@@ -29,9 +25,9 @@ app.use(express.static('public'))
 
 //------DATABASE SQLITE3----------------------
 try {
-    knex.schema.hasTable('mensajes').then(function (exists: any) {
+    knexInstance.schema.hasTable('mensajes').then(function (exists: any) {
         if (!exists) {
-            return knex.schema.createTable('mensajes', function (t: any) {
+            return knexInstance.schema.createTable('mensajes', function (t: any) {
                 t.increments('id').primary()
                 t.string('email', 25)
                 t.string('fecha', 25)
@@ -62,7 +58,7 @@ app.set('view engine', 'hbs')
 
 io.on("connection", function(socket: any) {
     socket.emit('coneccion', 'Bienvenidx, por favor indique su nombre')
-    knex('mensajes').select('*')
+    knexInstance<Mensaje>('mensajes').select('*')
         .then((messagesSolved: Mensaje[])=>io.emit("recargMsg", messagesSolved)   
     )
     
@@ -96,9 +92,9 @@ io.on("connection", function(socket: any) {
                     mensaje
         }
         console.log('nuevo msg antes de ' + email)
-        knex('mensajes').insert(msg)
+        knexInstance<Mensaje>('mensajes').insert(msg)
             .then(function () {
-                let mensajes = knex('mensajes').select('*')
+                let mensajes = knexInstance<Mensaje>('mensajes').select('*')
                 return  mensajes
             })
             .then(function (mensajes: Mensaje[]) {
