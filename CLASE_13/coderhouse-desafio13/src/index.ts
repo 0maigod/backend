@@ -1,16 +1,21 @@
 import express from "express"
-// import io from "socket.io"
 import moment from 'moment'
 import path from 'path'
 import { Producto } from './producto'
 import {CommonRoutesConfig} from './rutas/common.route.config'
 import {UsersRoutes} from './rutas/users.route.config'
 import handlebars from 'express-handlebars'
-import { Archivo, Mensaje } from './mensaje'
+import { Mensaje } from './mensaje'
+
+const knex = require('knex')({
+  client: 'sqlite3',
+  connection: {
+    filename: './DB/mensajes.sqlite',
+  },
+    useNullAsDefault: true,
+});
 
 const routes: Array<CommonRoutesConfig> = []
-
-let chatMensajes = new Archivo('mensajes')
 
 const app = express()
 app.set("port", process.env.PORT || 8080);
@@ -21,6 +26,22 @@ let productos: Producto [] = []
 routes.push(new UsersRoutes(app, productos))
 
 app.use(express.static('public'))
+
+//------DATABASE SQLITE3----------------------
+try {
+    knex.schema.hasTable('mensajes').then(function (exists: any) {
+        if (!exists) {
+            return knex.schema.createTable('mensajes', function (t: any) {
+                t.increments('id').primary()
+                t.string('email', 25)
+                t.string('fecha', 25)
+                t.string('mensaje', 150)
+            });
+        }
+    });
+} catch(e) {
+  console.error(e);
+};
 
 //------HANDLEBARS-----------------------------
 
@@ -41,9 +62,8 @@ app.set('view engine', 'hbs')
 
 io.on("connection", function(socket: any) {
     socket.emit('coneccion', 'Bienvenidx, por favor indique su nombre')
-    // socket.emit("recargProd", productos)
-    let mensajes = chatMensajes.leer().then(
-        (messagesSolved)=>io.emit("recargMsg", messagesSolved)   
+    knex('mensajes').select('*')
+        .then((messagesSolved: Mensaje[])=>io.emit("recargMsg", messagesSolved)   
     )
     
     socket.on('bienvenida', (data: any) => {
@@ -52,7 +72,6 @@ io.on("connection", function(socket: any) {
     
     
     socket.on("newProd", function(message: any) {
-        // console.log(message);
         let id = (productos.length + 1).toString()
         const {title, price, thumbnail, nombre} = message
         const prod = {
@@ -69,21 +88,21 @@ io.on("connection", function(socket: any) {
     
     socket.on("newMsg", function (message: Mensaje) {
         
-        const { email, mensaje, id } = message
+        const { email, mensaje } = message
         const fecha = moment().format('DD/MM/YYYY hh:mm:ss')
         const msg = {
-                    id,
                     email,
                     fecha,
                     mensaje
         }
-        chatMensajes.guardar(msg)
-            .then(function (response) {
-                mensajes = chatMensajes.leer()
+        console.log('nuevo msg antes de ' + email)
+        knex('mensajes').insert(msg)
+            .then(function () {
+                let mensajes = knex('mensajes').select('*')
                 return  mensajes
             })
-            .then(function (response) {
-                return io.emit("recargMsg", response)
+            .then(function (mensajes: Mensaje[]) {
+                return io.emit("recargMsg", mensajes)
         })
 
     });

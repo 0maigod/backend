@@ -4,7 +4,7 @@ export interface Mensaje {
     email: string
     fecha: any
     mensaje: string
-    id: number
+    // id: number
   }
 
 export class Mensaje {
@@ -12,7 +12,7 @@ export class Mensaje {
         this.email = email;
         this.fecha = fecha;
         this.mensaje = mensaje
-        this.id = id
+        // this.id = id
     }
 }
 
@@ -22,7 +22,7 @@ export interface Archivo {
 
 export class Archivo {
     constructor (archivo: string) {
-        this.archivo = `./datos/${archivo}.txt`;      
+        this.archivo = `./DB/${archivo}.txt`;      
     }
     
     async leer() {
@@ -45,11 +45,10 @@ export class Archivo {
     async guardar(datos: Mensaje) {
         let arr = await this.leer()
         let nuevoItem = datos
-        nuevoItem.id = arr.length + 1
+        // nuevoItem.id = arr.length + 1
         arr.push(nuevoItem)
             
         fs.promises.writeFile(`${this.archivo}`, `${JSON.stringify(arr)}`)
-        // .then(console.log(datos))
         
     }
 
@@ -62,10 +61,3 @@ export class Archivo {
     }
            
 }
-        
-// let otroItem = new Archivo('productos')
-
-
-// otroItem.guardar(prod)
-// otroItem.leer('productos')
-// otroItem.borrar('productos')
