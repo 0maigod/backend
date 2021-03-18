@@ -1,0 +1,9 @@
+use prueba
+db.createCollection("items")
+db.items.insert({nombre:"Fideos", categoria:"Harina", stock:5})
+db.items.insert({nombre:"Leche", categoria:"Lacteos", stock:30})
+db.items.insert({nombre:"Crema", categoria:"Lacteos", stock:15})
+db.items.find()
+show dbs
+db.getCollectionNames()
+db.items.find()

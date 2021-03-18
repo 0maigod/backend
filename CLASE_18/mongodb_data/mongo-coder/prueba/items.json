@@ -1,0 +1,18 @@
+{ 
+    "_id" : ObjectId("60539e32f925d0bef01f3b1e"), 
+    "nombre" : "Fideos", 
+    "categoria" : "Harina", 
+    "stock" : 5.0
+}
+{ 
+    "_id" : ObjectId("60539eb7f925d0bef01f3b1f"), 
+    "nombre" : "Leche", 
+    "categoria" : "Lacteos", 
+    "stock" : 30.0
+}
+{ 
+    "_id" : ObjectId("60539ebef925d0bef01f3b20"), 
+    "nombre" : "Crema", 
+    "categoria" : "Lacteos", 
+    "stock" : 15.0
+}
