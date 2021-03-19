@@ -1,0 +1,80 @@
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06182"), 
+    "timestamp" : "03/03/2021 04:55:44", 
+    "nombre" : "Poroto de Soja", 
+    "precio" : NumberInt(1280), 
+    "foto" : "https://ruralnet.com.ar/wp-content/uploads/2020/07/POROTO-DE-SOJA.jpg", 
+    "descripcion" : "Es una buena fuente de proteína vegetal, de vitaminas y de minerales", 
+    "codigo" : "LPS002", 
+    "stock" : 100.0
+}
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06183"), 
+    "timestamp" : "04/03/2021 05:55:44", 
+    "nombre" : "Poroto Negro", 
+    "precio" : NumberInt(1700), 
+    "foto" : "https://www.agritotal.com/files/image/32/32269/5eb922e6ddecf_907_510!.jpg?s=772e8409944f765eec23cb5d812ea6fc&d=1589191959", 
+    "descripcion" : "Contienen grandes cantidades de minerales, entre ellos el molibdeno, cuya función principal es desintoxicar al organismo", 
+    "codigo" : "LPN003", 
+    "stock" : 100.0
+}
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06184"), 
+    "timestamp" : "05/03/2021 06:55:44", 
+    "nombre" : "Miel", 
+    "precio" : NumberInt(2300), 
+    "foto" : "https://www.elcampesino.co/wp-content/uploads/2019/01/miel-portada.jpg", 
+    "descripcion" : "Estimula la relajación nocturna y el sueño, ya que el azúcar natural que contiene produce una ligera secreción de insulina", 
+    "codigo" : "DM001", 
+    "stock" : 100.0
+}
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06185"), 
+    "timestamp" : "06/03/2021 07:55:44", 
+    "nombre" : "Azucar Moreno", 
+    "precio" : NumberInt(2860), 
+    "foto" : "https://www.quo.es/wp-content/uploads/2019/10/el-azucar-moreno-es-mas-sano-que-el-blanco.jpg", 
+    "descripcion" : "El azúcar moreno es un producto más nutritivo, ya que contiene minerales básicos para nuestra dieta", 
+    "codigo" : "DAM002", 
+    "stock" : 100.0
+}
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06186"), 
+    "timestamp" : "07/03/2021 08:55:44", 
+    "nombre" : "Mermelada de Durazno", 
+    "precio" : NumberInt(3350), 
+    "foto" : "https://i.ytimg.com/vi/lBq3opO-jX0/hqdefault.jpg", 
+    "descripcion" : "Un gran aporte de energía, grasas y glucosa, que nos ayudará a sobrellevar momentos del día con mucha actividad", 
+    "codigo" : "DMD003", 
+    "stock" : 100.0
+}
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06187"), 
+    "timestamp" : "08/03/2021 09:55:44", 
+    "nombre" : "Frutas Secas", 
+    "precio" : NumberInt(4320), 
+    "foto" : "https://saludycardiologia.com/wp-content/uploads/2018/02/cardio-26-1200x900.jpg", 
+    "descripcion" : "Son ricos en minerales como el calcio, potasio y magnesio. Ayudan a fortificar y contribuyen en la mineralización de nuestros huesos", 
+    "codigo" : "DFS004", 
+    "stock" : 0.0
+}
+{ 
+    "_id" : ObjectId("6054ed67f47b610901b06188"), 
+    "timestamp" : "09/03/2021 10:55:44", 
+    "nombre" : "Cebada Perlada", 
+    "precio" : NumberInt(4990), 
+    "foto" : "https://previews.123rf.com/images/rissystory/rissystory1712/rissystory171200034/92567483-cebada-perlada-en-un-taz%C3%B3n.jpg", 
+    "descripcion" : "Es un cereal de gran valor nutritivo, rico en vitaminas y minerales superando al trigo en algunas de sus propiedades", 
+    "codigo" : "CCP003", 
+    "stock" : 0.0
+}
+{ 
+    "_id" : ObjectId("6054ed8f721ceca3d35e8c44"), 
+    "timestamp" : "11/03/2021 11:55:44", 
+    "nombre" : "Harina Integral", 
+    "precio" : 5100.0, 
+    "foto" : "https://static.vix.com/es/sites/default/files/imj/otramedicina/H/Harina-refinada-vs-harina-integral-3.jpg", 
+    "descripcion" : "Evita la constipación, reduce los niveles de colesterol en sangre y puede ayudar a prevenir la obesidad", 
+    "codigo" : "CHI004", 
+    "stock" : 0.0
+}

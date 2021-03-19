@@ -1,0 +1,52 @@
+{ 
+    "_id" : "admin.admin", 
+    "userId" : UUID("13284744-b194-4f8e-a7e9-6b22bdfd9a70"), 
+    "user" : "admin", 
+    "db" : "admin", 
+    "credentials" : {
+        "SCRAM-SHA-1" : {
+            "iterationCount" : NumberInt(10000), 
+            "salt" : "yyfH1sNKiAoVEiDkBT+NPg==", 
+            "storedKey" : "uE9ITNPacuWnwrbj+V8lzlDDuKM=", 
+            "serverKey" : "rMhSVEkGOiZ3/+OQ7dQa+yJBL5g="
+        }, 
+        "SCRAM-SHA-256" : {
+            "iterationCount" : NumberInt(15000), 
+            "salt" : "wojXXq0OcC5Fs3LjQwjaVfpPJZPWBOT3/DF5nA==", 
+            "storedKey" : "0Bc0JGBZrdi2/iO318ywh6IBF4f8D6hTdNrKMOQsBH8=", 
+            "serverKey" : "0ZXQKBU6A6zmeT1RgHIH+0v25SxF3cu3hKp1Htg9NLI="
+        }
+    }, 
+    "roles" : [
+        {
+            "role" : "root", 
+            "db" : "admin"
+        }
+    ]
+}
+{ 
+    "_id" : "admin.pepe", 
+    "userId" : UUID("261af9f1-f545-4010-93ab-fbb00fbd7456"), 
+    "user" : "pepe", 
+    "db" : "admin", 
+    "credentials" : {
+        "SCRAM-SHA-1" : {
+            "iterationCount" : NumberInt(10000), 
+            "salt" : "NkXUSw1+6BHeyrmQzJ49WA==", 
+            "storedKey" : "mB8ngXP6tvePnZ9v7W8270xpwLM=", 
+            "serverKey" : "DCTlStRbpCjhN0fh28JQaFdshCo="
+        }, 
+        "SCRAM-SHA-256" : {
+            "iterationCount" : NumberInt(15000), 
+            "salt" : "b0hLrvABm3vDo0yRUlrsr7abSfC7Wxhq3tYHhw==", 
+            "storedKey" : "BcSK0aBs93jmvbVtcODIUVKGMCqm2qcOEuhpEYj3nAA=", 
+            "serverKey" : "H8nJFXf/BWVw/txL9Ps50os6GzdFeQHOM9BoFfOdvkY="
+        }
+    }, 
+    "roles" : [
+        {
+            "role" : "read", 
+            "db" : "ecommerce"
+        }
+    ]
+}
