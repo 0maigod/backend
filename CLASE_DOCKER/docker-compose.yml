@@ -1,0 +1,11 @@
+version: "3.0"
+services:
+  nodeserver:
+    build:
+      context: ./app
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "65000:80"
